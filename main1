@@ -1,0 +1,292 @@
+package okienka;
+
+
+
+
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
+
+
+public class Main1 extends Application {
+public static void main(String[] args) {
+launch(args);}
+
+/*
+public enum MessageBoxIcon 
+{Information("Information"), Warning("Warning"), Alert("Alert"), 
+	CriticalError("CriticalError");
+	*/
+	
+public enum MessageBoxButton
+{AbortRetryIgnore, OK, OkCancel, 
+	RetryCancel,YesNo,
+	YesNoCancel;}
+
+public enum MessageBoxResult
+{Abort,Retry,Ignore,OK,
+	Cancel,Yes,No;}
+
+private static MessageBoxResult buttonSelected = MessageBoxResult.Cancel;
+
+
+
+	
+public void start(Stage primaryStage) {
+
+/*
+	Optional<MessageBoxIcon> result = 
+			(new LogonDialog("Zadanie z oknami",
+			"Lista opcji do wyboru")).showAndWait();
+	Alert alert= new Alert(AlertType.WARNING);
+*/
+	
+	
+	
+	Image image1 = new Image(
+	ClassLoader.getSystemResourceAsStream("StatusHelp_64x.png"));
+	ImageView imageView1 = new ImageView(image1);
+	Image image2 = new Image(
+	ClassLoader.getSystemResourceAsStream("StatusOK_32x.png"));
+	ImageView imageView2 = new ImageView(image2);
+	Image image3 = new Image(
+	ClassLoader.getSystemResourceAsStream("StatusNo_32xLG.png"));
+	ImageView imageView3 = new ImageView(image3);
+	Image image4 = new Image(
+	ClassLoader.getSystemResourceAsStream("StatusCriticalError_64x.png"));
+	ImageView imageView4 = new ImageView(image4);
+	Image image5 = new Image(
+	ClassLoader.getSystemResourceAsStream("StatusInformation_64x.png"));
+	ImageView imageView5 = new ImageView(image5);			
+	Image image6 = new Image(
+	ClassLoader.getSystemResourceAsStream("StatusAlert_64x.png"));
+	ImageView imageView6 = new ImageView(image6);	
+	Image image7 = new Image(
+			ClassLoader.getSystemResourceAsStream("StatusWarning_64x.png"));
+			ImageView imageView7 = new ImageView(image7);
+			
+
+	
+			
+	Stage dialogStage5 = new Stage();
+	dialogStage5.initModality(Modality.WINDOW_MODAL);
+	dialogStage5.getIcons().add(new Image(ClassLoader.getSystemResourceAsStream("Collapse_16xLG.png")));
+	Label lblMsg5 = new Label("Warning, warning, warning, warning, warning, warning, warning, warning, warning,"
+			+"Warning, warning, warning, warning, warning, warning, warning, warning, warning,"
+			+ " warning, warning, warning, warning, warning, warning, warning, warning, warning, warning, warning");
+	lblMsg5.setFont(Font.font("Arial", FontWeight.NORMAL, 14));
+	lblMsg5.setFont(Font.font(12));
+	lblMsg5.setWrapText(true);
+	Button btnRetry5 = new Button("Retry");
+	Button btnIgnore5 = new Button("Ignore");
+	btnIgnore5.setDefaultButton(true);
+	HBox hbox51 = new HBox(imageView7,lblMsg5);
+	HBox hbox52 = new HBox(btnRetry5,btnIgnore5);
+	VBox vbox5 = new VBox(hbox51, hbox52);
+	vbox5.setAlignment(Pos.CENTER_LEFT);
+	hbox51.setAlignment(Pos.BASELINE_LEFT);
+	hbox52.setAlignment(Pos.CENTER);
+	vbox5.setPadding(new Insets(10,10,10,10));
+	hbox52.setSpacing(20);
+	dialogStage5.setTitle("Oknowarning");
+	dialogStage5.setScene(new Scene(vbox5,600,200));
+	dialogStage5.show();				
+	btnRetry5.setOnAction( new EventHandler<ActionEvent>() {
+        @Override public void handle( ActionEvent e ) {
+        	dialogStage5.close();
+            buttonSelected = MessageBoxResult.Retry;
+        }
+    } );
+	btnIgnore5.setOnAction( new EventHandler<ActionEvent>() {
+        @Override public void handle( ActionEvent e ) {
+        	dialogStage5.close();
+            buttonSelected = MessageBoxResult.Ignore;
+        }
+    } );
+	
+	
+	
+			
+		
+	Stage dialogStage4 = new Stage();
+	dialogStage4.initModality(Modality.WINDOW_MODAL);
+	dialogStage4.getIcons().add(new Image(ClassLoader.getSystemResourceAsStream("StatusSuppressed_64x.png")));
+	Label lblMsg4 = new Label("Alert, alert, alert, alert, alert, alert, alert, alert, alert, alert, alert, alert, alert, alert,"
+			+ " alert, alert, alert, alert, alert, alert, alert, alert, alert, alert, alert,");
+	lblMsg4.setFont(Font.font("Arial", FontWeight.NORMAL, 14));
+	lblMsg4.setFont(Font.font(12));
+	lblMsg4.setWrapText(true);
+	Button btnAbort4 = new Button("Abort");
+	Button btnRetry4 = new Button("Retry");
+	Button btnIgnore4 = new Button("Ignore");
+	btnIgnore4.setDefaultButton(true);
+	HBox hbox41 = new HBox(imageView6,lblMsg4);
+	HBox hbox42 = new HBox(btnAbort4,btnRetry4,btnIgnore4);
+	VBox vbox4 = new VBox(hbox41, hbox42);
+	vbox4.setAlignment(Pos.CENTER_LEFT);
+	hbox41.setAlignment(Pos.BASELINE_LEFT);
+	hbox42.setAlignment(Pos.CENTER);
+	vbox4.setPadding(new Insets(10,10,10,10));
+	hbox42.setSpacing(20);
+	dialogStage4.setTitle("Okno alert");
+	dialogStage4.setScene(new Scene(vbox4,600,200));
+	dialogStage4.show();		
+	btnAbort4.setOnAction( new EventHandler<ActionEvent>() {
+        @Override public void handle( ActionEvent e ) {
+        	dialogStage4.close();
+            buttonSelected = MessageBoxResult.Abort;
+        }
+    } );
+	btnRetry4.setOnAction( new EventHandler<ActionEvent>() {
+        @Override public void handle( ActionEvent e ) {
+        	dialogStage4.close();
+            buttonSelected = MessageBoxResult.Retry;
+        }
+    } );
+	btnIgnore4.setOnAction( new EventHandler<ActionEvent>() {
+        @Override public void handle( ActionEvent e ) {
+        	dialogStage4.close();
+            buttonSelected = MessageBoxResult.Ignore;
+        }
+    } );
+	
+	
+			
+			
+	Stage dialogStage3 = new Stage();
+	dialogStage3.initModality(Modality.WINDOW_MODAL);
+	dialogStage3.getIcons().add(new Image(ClassLoader.getSystemResourceAsStream("StatusInformation_16x.png")));
+	Label lblMsg3 = new Label("Informacyjne okienko do zadania. To jest bardzo dlugie pytanie. To jest bardzo dlugie pytanie. To jest bardzo dlugie pytanie."
+					+ " To jest bardzo dlugie pytanie. To jest bardzo dlugie pytanie?");
+	lblMsg3.setFont(Font.font("Arial", FontWeight.NORMAL, 14));
+	lblMsg3.setFont(Font.font(12));
+	lblMsg3.setWrapText(true);
+	Button btnOK3 = new Button("Tak");
+	btnOK3.setDefaultButton(true);
+	HBox hbox31 = new HBox(imageView5,lblMsg3);
+	HBox hbox32 = new HBox(btnOK3);
+	VBox vbox3 = new VBox(hbox31, hbox32);
+	vbox3.setAlignment(Pos.CENTER);
+	hbox31.setAlignment(Pos.BASELINE_LEFT);
+	hbox32.setAlignment(Pos.CENTER);
+	vbox3.setPadding(new Insets(10,10,10,10));
+	dialogStage3.setTitle("Okno informacyjne");
+	dialogStage3.setScene(new Scene(vbox3,600,200));
+	dialogStage3.show();
+	btnOK3.setOnAction( new EventHandler<ActionEvent>() {
+        @Override public void handle( ActionEvent e ) {
+        	dialogStage3.close();
+            buttonSelected = MessageBoxResult.OK;
+        }
+    } );
+	
+			
+			
+			
+	Stage dialogStage2 = new Stage();
+	dialogStage2.initModality(Modality.WINDOW_MODAL);
+	dialogStage2.getIcons().add(new Image(ClassLoader.getSystemResourceAsStream("StatusCriticalError_64x.png")));
+	Label lblMsg2 = new Label("Error, error, error, error, error, error, error, "
+			+ "error, error, error, error, error, error, error, error, error,"
+			+ "error, error, error, error, error, error, error, error, error...");
+	lblMsg2.setFont(Font.font("Arial", FontWeight.NORMAL, 14));
+	lblMsg2.setFont(Font.font(12));
+	lblMsg2.setWrapText(true);
+	Button btnYes2 = new Button("Tak");
+	Button btnNo2 = new Button("Nie");
+	Button btnCancel2 = new Button("Anuluj");
+	btnYes2.setDefaultButton(true);
+	btnCancel2.setCancelButton(true);
+	HBox hbox21 = new HBox(imageView4,lblMsg2);
+	HBox hbox22 = new HBox(btnYes2,btnNo2,btnCancel2);
+	VBox vbox2 = new VBox(hbox21, hbox22);
+	vbox2.setAlignment(Pos.CENTER);
+	hbox21.setAlignment(Pos.BASELINE_LEFT);
+	hbox22.setAlignment(Pos.CENTER);
+	hbox22.setSpacing(20);
+	vbox2.setPadding(new Insets(10,10,10,10));
+	dialogStage2.setTitle("Okno CriticalErrro");
+	dialogStage2.setScene(new Scene(vbox2,600,200));
+	dialogStage2.show();
+	btnYes2.setOnAction( new EventHandler<ActionEvent>() {
+        @Override public void handle( ActionEvent e ) {
+        	dialogStage2.close();
+            buttonSelected = MessageBoxResult.Yes;
+        }
+    } );
+	btnNo2.setOnAction( new EventHandler<ActionEvent>() {
+        @Override public void handle( ActionEvent e ) {
+        	dialogStage2.close();
+            buttonSelected = MessageBoxResult.No;
+        }
+    } );
+	btnCancel2.setOnAction( new EventHandler<ActionEvent>() {
+        @Override public void handle( ActionEvent e ) {
+        	dialogStage2.close();
+            buttonSelected = MessageBoxResult.Cancel;
+        }
+    } );
+	
+		
+	
+	Stage dialogStage = new Stage();
+	dialogStage.initModality(Modality.WINDOW_MODAL);
+	dialogStage2.getIcons().add(new Image(ClassLoader.getSystemResourceAsStream("StatusHelp_64x.png")));
+	Label lblMsg = new Label("Informacyjne okienko do zadania. To jest bardzo dlugie pytanie. To jest bardzo dlugie pytanie. To jest bardzo dlugie pytanie."
+			+ " To jest bardzo dlugie pytanie. To jest bardzo dlugie pytanie?");
+	lblMsg.setFont(Font.font("Arial", FontWeight.NORMAL, 14));
+	lblMsg.setFont(Font.font(12));
+	lblMsg.setWrapText(true);
+	Button btnYes = new Button("Tak");
+	Button btnNo = new Button("Nie");
+	btnYes.setDefaultButton(true);
+	btnNo.setCancelButton(true);
+	btnYes.setGraphic(imageView2);
+	btnNo.setGraphic(imageView3);
+	btnYes.setGraphicTextGap(10);
+	btnNo.setGraphicTextGap(10);
+	HBox hbox11 = new HBox(imageView1,lblMsg);
+	HBox hbox12 = new HBox(btnYes,btnNo );
+	VBox vbox = new VBox(hbox11, hbox12);
+	vbox.setAlignment(Pos.TOP_LEFT);
+	hbox11.setAlignment(Pos.BASELINE_LEFT);
+	hbox12.setAlignment(Pos.CENTER);
+	hbox12.setSpacing(20);
+	vbox.setPadding(new Insets(10,10,10,10));
+	dialogStage.setTitle("Okno potwierdzenia");
+	dialogStage.setScene(new Scene(vbox,550, 180));
+	dialogStage.show();
+	btnYes.setOnAction( new EventHandler<ActionEvent>() {
+        @Override public void handle( ActionEvent e ) {
+        	dialogStage.close();
+            buttonSelected = MessageBoxResult.Yes;
+        }
+    } );
+	btnNo.setOnAction( new EventHandler<ActionEvent>() {
+        @Override public void handle( ActionEvent e ) {
+        	dialogStage.close();
+            buttonSelected = MessageBoxResult.No;
+        }
+    } );
+	
+	
+	} 
+	}
